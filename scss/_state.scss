@@ -7,3 +7,17 @@
 		content: "Gold: ";
 	}
 }
+
+.cost {
+	&::before {
+		content: '(';
+	}
+	&::after {
+		content: ')';
+	}
+}
+
+.expensive {
+	color: red;
+	cursor: not-allowed;
+}

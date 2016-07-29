@@ -19,7 +19,6 @@ nginx example config:
     
         location / {
             try_files $uri /index.php/$uri$is_args$args;
-            rewrite ^/info/(.*) /info.php/$1 last;
         }
     
         location /static/ {
@@ -28,7 +27,7 @@ nginx example config:
             sendfile off;
         }
     
-        location ~ /(index|info).php {
+        location ~ /(index).php {
             include snippets/fastcgi-php.conf;
             include fastcgi_params;
             fastcgi_pass unix:/var/run/php5-fpm.sock;

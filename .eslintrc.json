@@ -1,0 +1,12 @@
+{
+	"env": {
+        "browser": true
+    },
+	"globals": {
+		"tree": true,
+		"size": false
+	},
+    "extends": [
+        "eslint:recommended"
+    ]
+}

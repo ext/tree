@@ -1,12 +1,24 @@
+html, body {
+	height: 100%;
+}
+
 #menu {
 	float: left;
 	width: 200px;
+	height: 100%;
+	position: relative;
 }
 
 #content {
 	float: left;
 }
 
-iframe {
+#timer {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
+	font-size: 90px;
+	font-family: monospace;
+	text-align: center;
+	padding: 15px;
 }

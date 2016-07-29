@@ -4,5 +4,5 @@
 $seed = 1334711;
 
 // size in tiles
-$map_width = 8;
-$map_height = 6;
+$map_width = 12;
+$map_height = 12;
