@@ -1,7 +1,9 @@
 Tree
 ====
 
-NördtroXy 48h-ish gamedev entry
+NördtroXy 48h-ish gamedev entry.
+
+HTML "only" game (some js-glue but the goal is to use as little as possible).
 
 Running
 -------
