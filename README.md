@@ -1,20 +1,34 @@
+Tree
+====
+
+NördtroXy 48h-ish gamedev entry
+
 Running
 -------
 
 nginx example config:
 
-    location /tree {
-        try_files $uri /tree/index.php/$uri$is_args$args;
-    }
-
-    location /tree/static/ {
-        try_files $uri =404;
-        alias /path/to/tree/public/static/;
-    }
-
-    location /tree/index.php {
-        alias /path/to/tree/public/index.php;
-        include snippets/fastcgi-php.conf;
-        include fastcgi_params;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
+    server {
+        listen 80;
+        listen [::]:80;
+        server_name tree;
+    
+        root /path/to/tree/public;
+    
+        location / {
+            try_files $uri /index.php/$uri$is_args$args;
+            rewrite ^/info/(.*) /info.php/$1 last;
+        }
+    
+        location /static/ {
+            try_files $uri =404;
+            expires off;
+            sendfile off;
+        }
+    
+        location ~ /(index|info).php {
+            include snippets/fastcgi-php.conf;
+            include fastcgi_params;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+        }
     }
