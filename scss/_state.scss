@@ -1,0 +1,9 @@
+#state {
+	&, li {
+		display: inline;
+	}
+
+	.gold::before {
+		content: "Gold: ";
+	}
+}

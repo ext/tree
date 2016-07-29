@@ -1,0 +1,42 @@
+#map {
+	font-size: 0;
+
+	.row {
+		@include clearfix;
+	}
+}
+
+.tile {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	border: 1px solid red;
+
+	&.dirt {
+		background: #fa0;
+	}
+
+	&.grass {
+		background: #af0;
+	}
+
+	&.fire {
+		background: #f00;
+	}
+
+	&.sapling {
+		background: #00a;
+	}
+
+	&.tree {
+		background: #0f0;
+	}
+
+	&.stump {
+		background: #333;
+	}
+
+	&:focus {
+		border-color: blue;
+	}
+}
