@@ -2,7 +2,7 @@
 var tree = (function(){
 	'use strict';
 
-	const INTERVAL = 25000;
+	const INTERVAL = 5000;
 	var info_frame = document.querySelector('#info iframe');
 	var blob;
 	var next_update = null;
@@ -55,6 +55,47 @@ var tree = (function(){
 	}
 
 	function grow(){
+		grow_expand();
+		grow_stumps();
+		grow_placeholders();
+	}
+
+	function grow_placeholders(){
+		blob.map = blob.map.replace(/§/g, 'd');
+		blob.map = blob.map.replace(/!/g, 'g');
+		blob.map = blob.map.replace(/&/g, '0');
+		blob.map = blob.map.replace(/#/g, 'G');
+		blob.map = blob.map.replace(/%/g, '9');
+	}
+
+	function grow_stumps(){
+		var w = size[0];
+		var h = size[1];
+		for ( var y = 0; y < h; y++ ){
+			for ( var x = 0; x < w; x++ ){
+				var i = y * w + x;
+				var t = blob.map.charAt(i);
+				switch (t){
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					var v = parseInt(t);
+					var q = '123456789x'.charAt(v);
+					blob.map = blob.map.substr(0, i) + q + blob.map.substr(i+1);
+					break;
+				}
+			}
+		}
+	}
+
+	function grow_expand(){
 		var w = size[0];
 		var h = size[1];
 		for ( var y = 0; y < h; y++ ){
@@ -66,11 +107,9 @@ var tree = (function(){
 				t = blob.map.charAt(i);
 				switch (t){
 				case 'g':
-					blob.map = blob.map.substr(0, i) + '#' + blob.map.substr(i+1);
-					break;
-
-				case 't':
-					blob.map = blob.map.substr(0, i) + '%' + blob.map.substr(i+1);
+					if ( Math.random() > 0.9 ){
+						blob.map = blob.map.substr(0, i) + '#' + blob.map.substr(i+1);
+					}
 					break;
 
 				case 'x':
@@ -78,7 +117,7 @@ var tree = (function(){
 					break;
 
 				case 'X':
-					blob.map = blob.map.substr(0, i) + 't' + blob.map.substr(i+1);
+					blob.map = blob.map.substr(0, i) + '0' + blob.map.substr(i+1);
 					break;
 
 				case 'q':
@@ -97,7 +136,7 @@ var tree = (function(){
 					break;
 
 				case 'G':
-				case 'T':
+				case '9':
 					if ( x > 0 ){
 						expand(y * w + (x-1), i); /* expand left */
 					}
@@ -117,26 +156,6 @@ var tree = (function(){
 				}
 			}
 		}
-
-		/* grow stumps */
-		for ( var y = 0; y < size[1]; y++ ){
-			for ( var x = 0; x < size[0]; x++ ){
-				var i, t;
-				i = y * w + x;
-				t = blob.map.charAt(i);
-				switch (t){
-				case 'T':
-					blob.map = blob.map.substr(0, i) + 'x' + blob.map.substr(i+1);
-					break;
-				}
-			}
-		}
-
-		blob.map = blob.map.replace(/§/g, 'd');
-		blob.map = blob.map.replace(/!/g, 'g');
-		blob.map = blob.map.replace(/&/g, 't');
-		blob.map = blob.map.replace(/#/g, 'G');
-		blob.map = blob.map.replace(/%/g, 'T');
 	}
 
 	function expand(i, j){
@@ -156,7 +175,7 @@ var tree = (function(){
 		case 'G':
 			blob.map = blob.map.substr(0, j) + '!' + blob.map.substr(j+1);
 			break;
-		case 'T':
+		case '9':
 			blob.map = blob.map.substr(0, j) + '&' + blob.map.substr(j+1);
 			break;
 		}
@@ -164,7 +183,7 @@ var tree = (function(){
 
 	function lumbermill(i){
 		var t = blob.map.charAt(i);
-		if ( t === 'T' ){
+		if ( t === '7' ){
 			harvest(i, 0, '§');
 		}
 	}
@@ -186,7 +205,7 @@ var tree = (function(){
 	function generate_map(){
 		var n = size[0] * size[1];
 		return Array(n).fill(0).map(function(){
-			var s = 'ddddddggGt';
+			var s = 'dddddddddddddddddddddddddddddddddggggggGG123456789x';
 			var r = randint(0, s.length);
 			return s.charAt(r);
 		}).join('');
@@ -194,10 +213,6 @@ var tree = (function(){
 
 	function clone(src){
 		return JSON.parse(JSON.stringify(src));
-	}
-
-	function info_document(){
-		return info_frame.contentWindow.document;
 	}
 
 	function build(i, tile, cost){
@@ -265,6 +280,12 @@ var tree = (function(){
 			}
 		});
 
+		if ( type === 'tree' ){
+			var i = parseInt(src.dataset.index);
+			var t = blob.map.charAt(i);
+			info.querySelector('.value').innerText = parseInt(t) * 80 + ' (' + t + ')';
+		}
+
 		elem.appendChild(info);
 	}
 
@@ -300,11 +321,19 @@ var tree = (function(){
 					type = 'sapling';
 					cls = 'sapling';
 					break;
-				case 't':
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
 					type = 'tree';
 					cls = 'tree';
 					break;
-				case 'T':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
 					type = 'tree';
 					cls = 'treeer';
 					break;
@@ -322,7 +351,7 @@ var tree = (function(){
 					cls = 'lumbermill';
 					break;
 				default:
-					console.error(t);
+					console.error('missing tile def', t);
 					type = 'error';
 					cls = 'error';
 					break;

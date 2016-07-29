@@ -29,12 +29,13 @@ $map = 'dddtdtddtdtdtdttdgggrgrrtrgtrgrtrrgrtgrtgrtrtrtrgtrgrtgtgrtg';
 		<template id="info-sapling">
 			<h4>dirt</h4>
 			<ul class="actions">
-				<li><a data-cost="40" data-action="build" data-build="t" href="#build">Water <span class="cost">40</span></a></li>
+				<li><a data-cost="40" data-action="build" data-build="0" href="#build">Water <span class="cost">40</span></a></li>
 			</ul>
 		</template>
 
 		<template id="info-tree">
 			<h4>Tree</h4>
+			<p>Value: <span class="value"></span></p>
 			<ul class="actions">
 				<li><a data-cost="40" data-action="harvest" href="#harvest">Harvest <span class="cost">40</span></a></li>
 				<li><a data-cost="1400" data-action="build" data-build="q" href="#build">Lumbermill <span class="cost">1400</span></a></li>
@@ -69,11 +70,6 @@ $map = 'dddtdtddtdtdtdttdgggrgrrtrgtrgrtrrgrtgrtgrtrtrtrgtrgrtgtgrtg';
 		<div id="content">
 			<div id="map"></div>
 		</div>
-		<div class="tile sapling"></div>
-		<div class="tile tree"></div>
-		<div class="tile treeer"></div>
-		<div class="tile stump"></div>
-		<div class="tile grass"></div>
 		<script>
 		var blob = <?=encode($state, 'js')?>;
 		var size = [<?=$map_width?>,<?=$map_height?>];
