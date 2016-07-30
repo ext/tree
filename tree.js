@@ -7,6 +7,7 @@ var tree = (function(){
 	var tree_level_mul = 80;
 	var blob;
 	var next_update = null;
+	var map = [];
 
 	init();
 
@@ -30,6 +31,7 @@ var tree = (function(){
 
 		setInterval(deferedUpdate, 250);
 		next_update = Date.now() + INTERVAL;
+		create_map();
 		render();
 	}
 
@@ -196,6 +198,7 @@ var tree = (function(){
 	function reset(){
 		localStorage.removeItem('blob');
 		blob = undefined;
+		map = [];
 		init();
 	}
 
@@ -283,7 +286,7 @@ var tree = (function(){
 		if ( type === 'tree' ){
 			var i = parseInt(src.dataset.index);
 			var t = blob.map.charAt(i);
-			info.querySelector('.value').innerText = parseInt(t) * tree_level_mul + ' (' + t + ')';
+			info.querySelector('.value').innerText = parseInt(t) * tree_level_mul + 'g (age ' + t + ')';
 		}
 
 		elem.appendChild(info);
@@ -293,12 +296,31 @@ var tree = (function(){
 	// 	document.getElementById('debug').innerText = JSON.stringify(blob, null, 2);
 	// }
 
-	function render_map(){
-		var map = document.getElementById('map');
-		map.innerHTML = '';
+	function create_map(){
+		var container = document.getElementById('map');
+		container.innerHTML = '';
 		for ( var y = 0; y < size[1]; y++ ){
 			var row = document.createElement('div');
 			row.className = 'row';
+			for ( var x = 0; x < size[0]; x++ ){
+				var i = y * size[0] + x;
+				var tile = document.createElement('a');
+				tile.href = "#tile";
+				tile.dataset.pos = [x,y];
+				tile.dataset.index = i;
+				tile.addEventListener('click', function(e){
+					load_info(this);
+					e.preventDefault();
+				});
+				row.appendChild(tile);
+				map.push(tile);
+			}
+			container.appendChild(row);
+		}
+	}
+
+	function render_map(){
+		for ( var y = 0; y < size[1]; y++ ){
 			for ( var x = 0; x < size[0]; x++ ){
 				var i = y * size[0] + x;
 				var t = blob.map.charAt(i);
@@ -356,19 +378,14 @@ var tree = (function(){
 					cls = 'error';
 					break;
 				}
-				var tile = document.createElement('a');
-				tile.href = "#tile";
+				var tile = map[i];
 				tile.className = 'tile ' + cls;
 				tile.dataset.type = type;
-				tile.dataset.pos = [x,y];
-				tile.dataset.index = i;
-				tile.addEventListener('click', function(e){
-					load_info(this);
-					e.preventDefault();
-				});
-				row.appendChild(tile);
+
+				if ( tile === document.activeElement ){
+					load_info(tile);
+				}
 			}
-			map.appendChild(row);
 		}
 	}
 

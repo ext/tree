@@ -22,3 +22,20 @@ html, body {
 	text-align: center;
 	padding: 15px;
 }
+
+#info {
+	margin-top: 25px;
+	padding: 10px 10px 0;
+	border-top: 1px solid #ccc;
+
+	h4, p {
+		margin-bottom: 5px;
+	}
+
+	li a {
+		display: block;
+		border: 1px solid #ccc;
+		margin-bottom: 5px;
+		padding: 5px;
+	}
+}

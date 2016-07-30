@@ -5,14 +5,16 @@
 	</head>
 	<body>
 		<template id="info-dirt">
-			<h4>dirt</h4>
+			<h4>Dirt</h4>
+			<p>Dirt tiles contains nothing but dirt. Saplings can be planted here.</p>
 			<ul class="actions">
 				<li><a data-cost="80" data-action="build" data-build="s" href="#build">Plant <span class="cost">80</span></a></li>
 			</ul>
 		</template>
 
 		<template id="info-grass">
-			<h4>dirt</h4>
+			<h4>Grass</h4>
+			<p>Grass spreads everywhere and prevents trees from being planted without clearing out the nasty grass first.</p>
 			<ul class="actions">
 				<li><a data-cost="20" data-action="build" data-build="d" href="#build">Clear <span class="cost">20</span></a></li>
 				<li><a data-cost="100" data-action="build" data-build="s" href="#build">Plant <span class="cost">100</span></a></li>
@@ -20,7 +22,8 @@
 		</template>
 
 		<template id="info-sapling">
-			<h4>dirt</h4>
+			<h4>Saplings</h4>
+			<p>Saplings will grow to trees if watered.</p>
 			<ul class="actions">
 				<li><a data-cost="40" data-action="build" data-build="0" href="#build">Water <span class="cost">40</span></a></li>
 			</ul>
@@ -29,6 +32,7 @@
 		<template id="info-tree">
 			<h4>Tree</h4>
 			<p>Value: <span class="value"></span></p>
+			<p>Trees can be harvested for gold. Older trees yield more gold but will rot and die if waiting too long.</p>
 			<ul class="actions">
 				<li><a data-cost="40" data-action="harvest" href="#harvest">Harvest <span class="cost">40</span></a></li>
 				<li><a data-cost="1400" data-action="build" data-build="q" href="#build">Lumbermill <span class="cost">1400</span></a></li>
@@ -37,6 +41,7 @@
 
 		<template id="info-stump">
 			<h4>Stumps</h4>
+			<p>Remains of old trees, can be cleared to allow planting new trees.</p>
 			<ul class="actions">
 				<li><a data-cost="60" data-action="build" data-build="d" href="#build">Clear <span class="cost">60</span></a></li>
 			</ul>
@@ -44,6 +49,7 @@
 
 		<template id="info-lumbermill">
 			<h4>Lumbermill</h4>
+			<p>Lumbermills will automatically chop down trees around it and produce planks. Planks yield a large amount of gold but beware of grass surrounding it as the grass will spread quickly.</p>
 			<ul class="actions">
 			</ul>
 		</template>
