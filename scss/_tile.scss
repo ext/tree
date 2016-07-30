@@ -6,13 +6,18 @@
 	}
 }
 
+.tile, .thingy {
+	background-color: transparent;
+	background-image: url(static/sprites.png);
+	background-repeat: no-repeat;
+}
+
 .tile {
 	$size: 64px;
 
 	display: inline-block;
 	width: $size;
 	height: $size;
-	background: transparent url(static/sprites.png) no-repeat;
 
 	&.dirt {
 		background-position: (-64px*0) (-64px*1);

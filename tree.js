@@ -8,6 +8,7 @@ var tree = (function(){
 	var blob;
 	var next_update = null;
 	var map = [];
+	var things = [];
 
 	init();
 
@@ -55,6 +56,31 @@ var tree = (function(){
 		grow();
 		commit();
 		render();
+	}
+
+	function update_thingy(q){
+		for ( var i = 0; i < things.length; i++ ){
+			var t = things[i];
+			var e = t.element;
+			var s = (q - t.start) / 1000.0;
+			if ( s > 1.0 ){
+				e.remove();
+				blob.gold += parseInt(t.gold);
+				commit();
+				render();
+				things[i] = null;
+			} else {
+				e.style.display = 'block';
+				e.style.top = (t.src[1] + s * (t.dst[1] - t.src[1])) + 'px';
+				e.style.left = (t.src[0] + s * (t.dst[0] - t.src[0])) + 'px';
+			}
+		}
+
+		things = things.filter(function(c){ return c !== null; });
+
+		if ( things.length > 0 ){
+			window.requestAnimationFrame(update_thingy);
+		}
 	}
 
 	function grow(){
@@ -230,7 +256,21 @@ var tree = (function(){
 		var value = parseInt(t) * tree_level_mul;
 
 		build(i, res || 'd', cost);
-		blob.gold += value;
+
+		var q = performance.now();
+		var pos = map[i].getBoundingClientRect();
+		var thingy = document.createElement('div');
+		thingy.className = 'thingy';
+		things.push({
+			element: thingy,
+			src: [pos.left, pos.top],
+			dst: [0, 0],
+			start: q,
+			gold: value,
+		});
+		document.querySelector('body').appendChild(thingy);
+
+		update_thingy(q);
 	}
 
 	function load_info(src){

@@ -39,3 +39,11 @@ html, body {
 		padding: 5px;
 	}
 }
+
+.thingy {
+	position: absolute;
+	display: none;
+	width: 64px;
+	height: 64px;
+	background-position: (-64px*1) (-64px*1);
+}
