@@ -15,19 +15,19 @@
 	background: transparent url(static/sprites.png) no-repeat;
 
 	&.dirt {
-		background-position: (-64px*0) (-64px*6);
+		background-position: (-64px*0) (-64px*1);
 	}
 
 	&.grass {
-		background-position: (-64px*0) (-64px*7);
+		background-position: (-64px*0) (-64px*2);
 	}
 
 	&.grasser {
-		background-position: (-64px*1) (-64px*7);
+		background-position: (-64px*1) (-64px*2);
 	}
 
 	&.lumbermill {
-		background-position: (-64px*2) (-64px*7);
+		background-position: (-64px*2) (-64px*2);
 	}
 
 	&.fire {

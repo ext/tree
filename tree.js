@@ -4,6 +4,7 @@ var tree = (function(){
 
 	var INTERVAL = 15000;
 	var size = [12,12];
+	var tree_level_mul = 80;
 	var blob;
 	var next_update = null;
 
@@ -222,8 +223,11 @@ var tree = (function(){
 	}
 
 	function harvest(i, cost, res){
+		var t = blob.map.charAt(i);
+		var value = parseInt(t) * tree_level_mul;
+
 		build(i, res || 'd', cost);
-		blob.gold += 200;
+		blob.gold += value;
 	}
 
 	function load_info(src){
@@ -279,7 +283,7 @@ var tree = (function(){
 		if ( type === 'tree' ){
 			var i = parseInt(src.dataset.index);
 			var t = blob.map.charAt(i);
-			info.querySelector('.value').innerText = parseInt(t) * 80 + ' (' + t + ')';
+			info.querySelector('.value').innerText = parseInt(t) * tree_level_mul + ' (' + t + ')';
 		}
 
 		elem.appendChild(info);
