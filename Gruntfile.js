@@ -1,19 +1,34 @@
 module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-datauri');
 	grunt.loadNpmTasks('grunt-preprocess');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('default', ['sass', 'uglify', 'preprocess']);
+	grunt.registerTask('default', ['datauri', 'sass', 'uglify', 'preprocess']);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+
+		datauri: {
+      dist: {
+        options: {
+          classPrefix: 'data-'
+        },
+        src: [
+          "scss/sprites.png",
+        ],
+        dest: [
+          "temp/sprites.scss",
+        ],
+      },
+    },
 
 		sass: {
 			options: {
 				outputStyle: "compressed",
 				includePaths: [
-					'node_modules/font-awesome/scss/',
+					'temp',
 				],
 			},
 			dist: {
