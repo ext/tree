@@ -2,8 +2,8 @@
 var tree = (function(){
 	'use strict';
 
-	const INTERVAL = 5000;
-	var info_frame = document.querySelector('#info iframe');
+	var INTERVAL = 15000;
+	var size = [12,12];
 	var blob;
 	var next_update = null;
 
@@ -211,10 +211,6 @@ var tree = (function(){
 		}).join('');
 	}
 
-	function clone(src){
-		return JSON.parse(JSON.stringify(src));
-	}
-
 	function build(i, tile, cost){
 		blob.map = blob.map.substr(0, i) + tile + blob.map.substr(i+1);
 
@@ -289,9 +285,9 @@ var tree = (function(){
 		elem.appendChild(info);
 	}
 
-	function render_debug(){
-		document.getElementById('debug').innerText = JSON.stringify(blob, null, 2);
-	}
+	// function render_debug(){
+	// 	document.getElementById('debug').innerText = JSON.stringify(blob, null, 2);
+	// }
 
 	function render_map(){
 		var map = document.getElementById('map');
@@ -378,7 +374,7 @@ var tree = (function(){
 	}
 
 	function render(){
-		render_debug();
+		//render_debug();
 		render_map();
 		render_ui();
 	}

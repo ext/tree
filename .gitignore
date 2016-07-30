@@ -1,4 +1,3 @@
-node_modules
-*.min.css
-*.css.map
-public/tree.html
+/node_modules
+/temp
+/public/tree.html

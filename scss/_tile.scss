@@ -12,9 +12,7 @@
 	display: inline-block;
 	width: $size;
 	height: $size;
-	background: transparent url(sprites.png) no-repeat;
-	//background-size: ($size / 64px) * 512px;
-	//background-size: 512px;
+	background: transparent url(static/sprites.png) no-repeat;
 
 	&.dirt {
 		background-position: (-64px*0) (-64px*6);

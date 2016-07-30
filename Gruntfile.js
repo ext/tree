@@ -1,24 +1,32 @@
 module.exports = function(grunt){
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-preprocess');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('default', ['sass', 'preprocess']);
+	grunt.registerTask('default', ['sass', 'uglify', 'preprocess']);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
 		sass: {
 			options: {
-				sourceMap: true,
-				style: "expanded",
+				outputStyle: "compressed",
 				includePaths: [
 					'node_modules/font-awesome/scss/',
 				],
 			},
-			build: {
+			dist: {
 				files: {
-					'public/static/tree.min.css': 'scss/tree.scss',
+					'temp/tree.min.css': 'scss/tree.scss',
+				},
+			},
+		},
+
+		uglify: {
+			dist: {
+				files: {
+					'temp/tree.min.js': ['tree.js'],
 				},
 			},
 		},
@@ -33,7 +41,11 @@ module.exports = function(grunt){
 		watch: {
 			scss: {
 				files: ['scss/**/*.scss'],
-				tasks: ['sass'],
+				tasks: ['sass', 'preprocess'],
+			},
+			js: {
+				files: ['tree.js'],
+				tasks: ['uglify', 'preprocess'],
 			},
 			html: {
 				files: ['index.html'],

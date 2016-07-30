@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <link rel="stylesheet" type="text/css" href="static/tree.min.css">
+		<style><!-- @include temp/tree.min.css --></style>
 	</head>
 	<body>
 		<template id="info-dirt">
@@ -57,15 +57,9 @@
 				<li><a href="#reset" onclick="arguments[0].preventDefault(); tree.reset()">restart</a></li>
 			</ul>
 			<div id="info"></div>
-			<pre id="debug"></pre>
 			<div id="timer"></div>
 		</div>
-		<div id="content">
-			<div id="map"></div>
-		</div>
-		<script>
-		var size = [12,12];
-		</script>
-		<script src="static/glue.js"></script>
+		<div id="content"><div id="map"></div></div>
+		<script><!-- @include temp/tree.min.js --></script>
 	</body>
 </html>
