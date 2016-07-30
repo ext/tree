@@ -49,7 +49,7 @@ module.exports = function(grunt){
 		preprocess : {
 			dist: {
 				src: 'index.html',
-				dest : 'public/tree.html'
+				dest : 'dist/tree.html'
 			},
 		},
 
