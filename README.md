@@ -3,10 +3,12 @@ Tree
 
 NördtroXy 48h-ish gamedev entry.
 
+Demo: https://ext.github.io/tree/
+
 Building
 --------
 
     npm install
     grunt
 
-Run `public/tree.html` in browser.
+Run `dist/tree.html` in browser.
