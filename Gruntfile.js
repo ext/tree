@@ -1,8 +1,9 @@
 module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-preprocess');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('default', ['sass']);
+	grunt.registerTask('default', ['sass', 'preprocess']);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -22,10 +23,21 @@ module.exports = function(grunt){
 			},
 		},
 
+		preprocess : {
+			dist: {
+				src: 'index.html',
+				dest : 'public/tree.html'
+			},
+		},
+
 		watch: {
 			scss: {
 				files: ['scss/**/*.scss'],
 				tasks: ['sass'],
+			},
+			html: {
+				files: ['index.html'],
+				tasks: ['preprocess'],
 			},
 		},
 	});

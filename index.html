@@ -1,10 +1,3 @@
-<?php
-
-require '../tree.php';
-
-$state = decode(isset($_GET['blob']) ? $_GET['blob'] : null);
-$map = 'dddtdtddtdtdtdttdgggrgrrtrgtrgrtrrgrtgrtgrtrtrtrgtrgrtgtgrtg';
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -57,7 +50,7 @@ $map = 'dddtdtddtdtdtdttdgggrgrrtrgtrgrtrrgrtgrtgrtrtrtrgtrgrtgtgrtg';
 
 		<div id="menu">
 			<ul id="state">
-				<li class="gold"><?=$state->gold?></li>
+				<li class="gold"></li>
 			</ul>
 			<ul>
 				<li><a href="#step" onclick="arguments[0].preventDefault(); tree.update()">step</a></li>
@@ -71,8 +64,7 @@ $map = 'dddtdtddtdtdtdttdgggrgrrtrgtrgrtrrgrtgrtgrtrtrtrgtrgrtgtgrtg';
 			<div id="map"></div>
 		</div>
 		<script>
-		var blob = <?=encode($state, 'js')?>;
-		var size = [<?=$map_width?>,<?=$map_height?>];
+		var size = [12,12];
 		</script>
 		<script src="static/glue.js"></script>
 	</body>
