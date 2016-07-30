@@ -24,19 +24,11 @@ html, body {
 }
 
 #info {
-	margin-top: 25px;
 	padding: 10px 10px 0;
 	border-top: 1px solid #ccc;
 
 	h4, p {
 		margin-bottom: 5px;
-	}
-
-	li a {
-		display: block;
-		border: 1px solid #ccc;
-		margin-bottom: 5px;
-		padding: 5px;
 	}
 }
 
@@ -46,4 +38,38 @@ html, body {
 	width: 64px;
 	height: 64px;
 	background-position: (-64px*1) (-64px*1);
+
+	&.planks {
+		background-position: (-64px*2) (-64px*1);
+	}
+}
+
+#toolbar {
+	padding: 5px;
+}
+
+#info, #toolbar {
+	li a {
+		display: block;
+		border: 1px solid #ccc;
+		margin-bottom: 5px;
+		padding: 5px;
+		color: #333;
+		text-decoration: none;
+
+		&:hover {
+			color: #000;
+			background: #ccc;
+			border-color: #000;
+		}
+
+		&.expensive {
+			border-color: red;
+			color: red;
+
+			&:hover {
+				background: transparent;
+			}
+		}
+	}
 }

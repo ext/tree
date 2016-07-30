@@ -52,7 +52,6 @@ var tree = (function(){
 	}
 
 	function update(){
-		console.log('update');
 		grow();
 		commit();
 		render();
@@ -213,7 +212,7 @@ var tree = (function(){
 	function lumbermill(i){
 		var t = blob.map.charAt(i);
 		if ( t === '7' ){
-			harvest(i, 0, '§');
+			harvest(i, 0, '§', 2);
 		}
 	}
 
@@ -251,9 +250,9 @@ var tree = (function(){
 		load_info(null);
 	}
 
-	function harvest(i, cost, res){
+	function harvest(i, cost, res, mul){
 		var t = blob.map.charAt(i);
-		var value = parseInt(t) * tree_level_mul;
+		var value = parseInt(t) * tree_level_mul * (mul || 1);
 
 		build(i, res || 'd', cost);
 
@@ -261,6 +260,7 @@ var tree = (function(){
 		var pos = map[i].getBoundingClientRect();
 		var thingy = document.createElement('div');
 		thingy.className = 'thingy';
+		if ( mul ) thingy.className += ' planks';
 		things.push({
 			element: thingy,
 			src: [pos.left, pos.top],
